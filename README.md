@@ -65,6 +65,7 @@ Home Router (192.168.1.1)
         └── Machine 2: i5-8600K — Ubuntu 24.04 bare metal (192.168.1.40)
                   Physical Wazuh Agent — monitored Linux endpoint
 ```
+<img width="1363" height="669" alt="image" src="https://github.com/user-attachments/assets/a659a791-f037-4c90-8bcc-dea98717906d" />
 
 > Real network traffic flows between physical machines through the home router,  
 > making attack detection more realistic compared to host-only VM networks.
