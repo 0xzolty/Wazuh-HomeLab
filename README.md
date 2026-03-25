@@ -188,8 +188,7 @@ Action: IP blocked for 600 seconds
 
 ### Step 1 — Install Wazuh Server (Primary machine VM)
 ```bash
-curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
-sudo bash wazuh-install.sh -a
+curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 ```
 Dashboard available at: `https://<wazuh-server-ip>` (credentials shown in install output)
 
