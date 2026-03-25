@@ -195,8 +195,15 @@ curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-i
 To open dashboard paste your ip in browser
 <img width="1646" height="900" alt="image" src="https://github.com/user-attachments/assets/739b9e35-6ae2-4d07-a31f-a92c7d214566" />
 
+### Step 2 — Deploy Windows Agent (Physical main machine)
+```bash
+Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.4-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='**SERVER IP' WAZUH_AGENT_NAME='**NAME'
+Manually verify the <address> field in ossec.conf. If it is set to 0.0.0.0, replace it with the correct Wazuh manager IP or hostname.
+```
+<img width="1620" height="691" alt="image" src="https://github.com/user-attachments/assets/4d2958b1-42dc-43ed-a247-49006a60230e" />
 
-### Step 2 — Deploy Linux Agent (Physical secondary machine)
+
+### Step 3 — Deploy Linux Agent (Physical secondary machine)
 ```bash
 curl -sO https://packages.wazuh.com/4.7/wazuh-agent_4.7.0-1_amd64.deb
 sudo WAZUH_MANAGER='<WAZUH_SERVER_IP>' dpkg -i wazuh-agent_4.7.0-1_amd64.deb
@@ -204,19 +211,19 @@ sudo systemctl enable wazuh-agent
 sudo systemctl start wazuh-agent
 ```
 
-### Step 3 — Verify Connection
+### Step 4 — Verify Connection
 ```bash
 # On Wazuh Server — confirm agent is connected
 sudo /var/ossec/bin/agent_control -l
 ```
 
-### Step 4 — Apply Custom Rules
+### Step 5 — Apply Custom Rules
 ```bash
 sudo cp config/custom-rules.xml /var/ossec/etc/rules/
 sudo systemctl restart wazuh-manager
 ```
 
-### Step 5 — Run Attack Simulations (from Kali VM)
+### Step 6 — Run Attack Simulations (from Kali VM)
 ```bash
 # Brute force SSH against physical agent
 hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.40
