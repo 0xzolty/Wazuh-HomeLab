@@ -73,13 +73,13 @@ Home Router (192.168.1.1)
 
 ### Components Summary
 
-| Host | Role | OS | Type |
-|---|---|---|---|
-| `wazuh-server` | Wazuh Manager + Dashboard | Ubuntu 24.04 LTS | Virtual Machine |
-| `kali-attacker` | Attack simulation | Kali Linux 2025.x | Virtual Machine |
-| `linux-agent` | Monitored endpoint | Ubuntu 24.04 LTS | **Physical (bare metal)** |
+| Host            | Role                      | OS                | Type                        |
+| --------------- | ------------------------- | ----------------- | --------------------------- |
+| `wazuh-server`  | Wazuh Manager + Dashboard | Ubuntu 24.04 LTS  | Virtual Machine             |
+| `kali-attacker` | Attack simulation         | Kali Linux 2025.x | Virtual Machine             |
+| `windows-agent` | Monitored endpoint        | Windows 11        | **Physical (host machine)** |
+| `linux-agent`   | Monitored endpoint        | Ubuntu 24.04 LTS  | **Physical (bare metal)**   |
 
----
 
 ## ⚙️ Configuration Highlights
 
