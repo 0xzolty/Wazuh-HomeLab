@@ -190,7 +190,9 @@ Action: IP blocked for 600 seconds
 ```bash
 curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 ```
-Dashboard available at: `https://<wazuh-server-ip>` (credentials shown in install output)
+To open dashboard paste your ip in browser
+<img width="1646" height="900" alt="image" src="https://github.com/user-attachments/assets/739b9e35-6ae2-4d07-a31f-a92c7d214566" />
+
 
 ### Step 2 — Deploy Linux Agent (Physical secondary machine)
 ```bash
