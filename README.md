@@ -195,10 +195,13 @@ curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-i
 To open dashboard paste your ip in browser
 <img width="1646" height="900" alt="image" src="https://github.com/user-attachments/assets/739b9e35-6ae2-4d07-a31f-a92c7d214566" />
 
-### Step 2 — Deploy Windows Agent (Physical main machine)
+### Step 2 — Deploy and configure Windows Agent (Physical main machine)
 ```bash
 Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.4-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='**SERVER IP' WAZUH_AGENT_NAME='**NAME'
 Manually verify the <address> field in ossec.conf. If it is set to 0.0.0.0, replace it with the correct Wazuh manager IP or hostname.
+# Download Sysmon + sysmon-modular config (https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)
+cd C:\Users\TwojaNazwa\Downloads
+.\Sysmon64.exe -accepteula -i sysmonconfig.xml
 ```
 <img width="1620" height="691" alt="image" src="https://github.com/user-attachments/assets/4d2958b1-42dc-43ed-a247-49006a60230e" />
 
