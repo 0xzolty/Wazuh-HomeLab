@@ -251,6 +251,7 @@ sudo echo "attacker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 | **VirusTotal API** | Threat intelligence enrichment |
 | **VirtualBox** | Virtualization on primary machine |
 | **Ubuntu 24.04 LTS / Kali 2025.x** | Operating systems |
+| **Sysmon + sysmon-modular** | Deep Windows endpoint telemetry |
 
 ---
 
