@@ -168,6 +168,19 @@ Action: IP blocked for 600 seconds
 **Result:** Alert enriched with VT detection ratio (e.g., `58/72 engines`).
 
 ---
+### Scenario X — Windows Defender Disabled
+**Attack:** Windows Defender real-time protection disabled manually — simulating an attacker trying to disable endpoint protection before deploying malware.
+```powershell
+Set-MpPreference -DisableRealtimeMonitoring $true
+```
+**Detection:** Windows Defender event forwarded to Wazuh.  
+**Result:** Alert — *"Windows Defender real-time protection disabled"*.  
+**Response:** Re-enable protection after test:
+```powershell
+Set-MpPreference -DisableRealtimeMonitoring $false
+```
+<img width="1634" height="167" alt="image" src="https://github.com/user-attachments/assets/b58cd860-679c-4094-a7a2-fe46216fa510" />
+
 
 ## 📊 Dashboard Screenshots
 
