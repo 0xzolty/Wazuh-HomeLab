@@ -219,38 +219,49 @@ cd C:\Users\TwojaNazwa\Downloads
 <img width="1620" height="691" alt="image" src="https://github.com/user-attachments/assets/4d2958b1-42dc-43ed-a247-49006a60230e" />
 
 
-### Step 3 — Deploy and configure Linux Agent/Server 
+### Step 3 — Deploy and configure Linux Agent/Server
 ```bash
 wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.4-1_amd64.deb && sudo WAZUH_MANAGER='192.168.0.236' dpkg -i ./wazuh-agent_4.14.4-1_amd64.deb
-sudo systemctl daemon-reload 
-sudo systemctl enable wazuh-agent 
+sudo systemctl daemon-reload
+sudo systemctl enable wazuh-agent
 sudo systemctl start wazuh-agent
-## Add Auditd to see every command log
+```
+
+## Add Auditd — log every command
+```bash
 sudo apt install auditd -y
 sudo systemctl enable auditd
 sudo systemctl start auditd
+```
+
 ## Deploy Apache Web Server (attack target)
-bash
+```bash
 sudo apt install apache2 -y
 sudo systemctl enable apache2
 sudo systemctl start apache2
 sudo cp index.html /var/www/html/index.html
+```
+
 ## Configure Wazuh agent — Add Apache log monitoring
+Open `/var/ossec/etc/ossec.conf` and add before `</ossec_config>`:
+```xml
+<localfile>
+  <location>/var/log/apache2/access.log</location>
+  <log_format>syslog</log_format>
+</localfile>
+<localfile>
+  <location>/var/log/apache2/error.log</location>
+  <log_format>syslog</log_format>
+</localfile>
+```
 ```bash
-sudo nano /var/ossec/etc/ossec.conf
-
-Add before `</ossec_config>`:
-xml
-
-  /var/log/apache2/access.log
-  syslog
-
-
-  /var/log/apache2/error.log
-  syslog
 sudo systemctl restart wazuh-agent
+```
+
 ## Configure FIM — Monitor web server and system files
 Add inside existing `<syscheck>` block in `/var/ossec/etc/ossec.conf`:
+```xml
+<directories check_all="yes" realtime="yes">/etc,/var/www/html</directories>
 ```
 <img width="1190" height="774" alt="image" src="https://github.com/user-attachments/assets/45721be5-db73-4f6f-98b9-80daf8d353ee" />
 <img width="1647" height="45" alt="image" src="https://github.com/user-attachments/assets/20ce18d4-95c8-4f1d-a986-d39dd63a71a7" />
