@@ -219,19 +219,15 @@ cd C:\Users\TwojaNazwa\Downloads
 <img width="1620" height="691" alt="image" src="https://github.com/user-attachments/assets/4d2958b1-42dc-43ed-a247-49006a60230e" />
 
 
-### Step 3 — Deploy Linux Agent (Physical secondary machine)
+### Step 3 — Deploy Linux Agent/Server 
 ```bash
-curl -sO https://packages.wazuh.com/4.7/wazuh-agent_4.7.0-1_amd64.deb
-sudo WAZUH_MANAGER='<WAZUH_SERVER_IP>' dpkg -i wazuh-agent_4.7.0-1_amd64.deb
-sudo systemctl enable wazuh-agent
+wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.4-1_amd64.deb && sudo WAZUH_MANAGER='192.168.0.236' dpkg -i ./wazuh-agent_4.14.4-1_amd64.deb
+sudo systemctl daemon-reload 
+sudo systemctl enable wazuh-agent 
 sudo systemctl start wazuh-agent
 ```
-
-### Step 4 — Verify Connection
-```bash
-# On Wazuh Server — confirm agent is connected
-sudo /var/ossec/bin/agent_control -l
-```
+<img width="1190" height="774" alt="image" src="https://github.com/user-attachments/assets/45721be5-db73-4f6f-98b9-80daf8d353ee" />
+<img width="1647" height="45" alt="image" src="https://github.com/user-attachments/assets/20ce18d4-95c8-4f1d-a986-d39dd63a71a7" />
 
 ### Step 5 — Apply Custom Rules
 ```bash
