@@ -213,10 +213,9 @@ sudo systemctl start apache2
 sudo cp index.html /var/www/html/index.html
 
 Add FIM — Monitor web server and system files
-
-sudo systemctl restart wazuh-agent
-
 use my .conf file for linux 
+
+sudo systemctl restart wazuh-agent 
 ```
 
 <img width="1190" height="774" alt="image" src="https://github.com/user-attachments/assets/45721be5-db73-4f6f-98b9-80daf8d353ee" />
