@@ -40,28 +40,6 @@ This lab runs across **two physical machines** connected to the same home router
 
 ---
 
-## 🏗️ Architecture
-
-```
-Home Router (192.168.1.1)
-        │
-        ├── Machine 1: Ryzen 5 7600 — Windows 11 (192.168.1.10)
-        │       │
-        │       ├── [VM] Wazuh Server — Ubuntu 24.04 (192.168.1.20)
-        │       │         Wazuh Manager + Indexer + Dashboard
-        │       │
-        │       └── [VM] Kali Linux 2025.x (192.168.1.30)
-        │                 Attack simulation machine
-        │
-        └── Machine 2: i5-8600K — Ubuntu 24.04 bare metal (192.168.1.40)
-                  Physical Wazuh Agent — monitored Linux endpoint
-```
-<img width="1203" height="600" alt="image" src="https://github.com/user-attachments/assets/cdd6cdd6-7266-4970-b321-20e4f7b4d1ec" />
-
-
-> Real network traffic flows between physical machines through the home router,  
-> making attack detection more realistic compared to host-only VM networks.
-
 ### Components Summary
 
 | Host            | Role                      | OS                | Type                        |
