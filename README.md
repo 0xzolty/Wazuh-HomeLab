@@ -229,36 +229,22 @@ sudo systemctl start wazuh-agent
 ```
 
 ## Add Auditd — log every command
-```bash
+
 sudo apt install auditd -y
 sudo systemctl enable auditd
 sudo systemctl start auditd
-```
+
 
 ## Deploy Apache Web Server (attack target)
-```bash
+
 sudo apt install apache2 -y
 sudo systemctl enable apache2
 sudo systemctl start apache2
 sudo cp index.html /var/www/html/index.html
-```
 
-## Configure Wazuh agent — Add Apache log monitoring
-Open `/var/ossec/etc/ossec.conf` and add before `</ossec_config>`:
-```xml
-<localfile>
-  <location>/var/log/apache2/access.log</location>
-  <log_format>syslog</log_format>
-</localfile>
-<localfile>
-  <location>/var/log/apache2/error.log</location>
-  <log_format>syslog</log_format>
-</localfile>
-```
-```bash
 sudo systemctl restart wazuh-agent
-```
 
+use my .conf file for linux
 ## Configure FIM — Monitor web server and system files
 Add inside existing `<syscheck>` block in `/var/ossec/etc/ossec.conf`:
 ```xml
