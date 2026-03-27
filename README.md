@@ -47,7 +47,7 @@ This lab runs across **two physical machines** connected to the same home router
 | `wazuh-server`  | Wazuh Manager + Dashboard | Ubuntu 24.04 LTS  | Virtual Machine             |
 | `kali-attacker` | Attack simulation         | Kali Linux 2025.x | Virtual Machine             |
 | `windows-agent` | Monitored endpoint        | Windows 11        | **Physical (host machine)** |
-| `linux-agent`   | Monitored endpoint        | Ubuntu 24.04 LTS  | **Physical **               |
+| `linux-agent`   | Monitored endpoint        | Ubuntu 24.04 LTS  | Virtual Machine                |
 
 
 ## ⚙️ Configuration Highlights
