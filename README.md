@@ -226,7 +226,7 @@ wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14
 sudo systemctl daemon-reload
 sudo systemctl enable wazuh-agent
 sudo systemctl start wazuh-agent
-```
+
 
 ## Add Auditd — log every command
 
@@ -244,7 +244,8 @@ sudo cp index.html /var/www/html/index.html
 
 sudo systemctl restart wazuh-agent
 
-use my .conf file for linux
+use my .conf file for linux 
+```
 ## Configure FIM — Monitor web server and system files
 Add inside existing `<syscheck>` block in `/var/ossec/etc/ossec.conf`:
 ```xml
