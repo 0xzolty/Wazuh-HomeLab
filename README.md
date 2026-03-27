@@ -271,24 +271,27 @@ nmap -sS -p- 192.168.1.40
 ---
 
 ## 🛠️ Tools & Technologies
-
 | Tool | Purpose |
 |---|---|
-| **Wazuh 4.7** | SIEM — log collection, alerting, Active Response |
+| **Wazuh 4.14** | SIEM — log collection, alerting, Active Response |
 | **OpenSearch + Dashboards** | Log indexing and visualization |
-| **Hydra** | SSH brute force simulation |
-| **nmap** | Network port scanning |
-| **VirusTotal API** | Threat intelligence enrichment |
-| **VirtualBox** | Virtualization on primary machine |
-| **Ubuntu 24.04 LTS / Kali 2025.x** | Operating systems |
 | **Sysmon + sysmon-modular** | Deep Windows endpoint telemetry |
+| **Windows Defender** | Endpoint AV — logs forwarded to Wazuh |
+| **Apache2** | Web server — attack target for web-based scenarios |
+| **Hydra** | SSH brute force simulation |
+| **ffuf** | Web directory fuzzing |
+| **nmap** | Network port scanning |
+| **Burp Suite** | Web login brute force via Intruder |
+| **Auditd** | Linux command logging |
+| **VirusTotal API** | Threat intelligence enrichment |
+| **VirtualBox / VMware** | Virtualization on primary machine |
+| **Ubuntu 24.04 LTS / Kali 2025.x / Windows 11** | Operating systems |
 
 ---
 
 ## 📚 What I Learned
 
 - How a SIEM ingests and normalizes logs from heterogeneous endpoints across a real network
-- Writing and tuning custom detection rules to reduce false positives
 - How Active Response works as an automated first line of defense
 - Difference between virtual and physical (bare metal) agent deployment
 - Integrating threat intelligence APIs into the alerting pipeline
