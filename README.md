@@ -264,8 +264,6 @@ hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.40
 # Port scan physical agent
 nmap -sS -p- 192.168.1.40
 ( You can use -t argument to control scan speed (t1=slowest/stealthy, t5=fastest)
-
-
 ```
 
 ---
