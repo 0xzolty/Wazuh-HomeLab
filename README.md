@@ -38,15 +38,6 @@ This lab runs across **two physical machines** connected to the same home router
 | OS | Windows 11 (host) |
 | Virtualization | VirtualBox — runs Wazuh Server VM + Kali Linux VM |
 
-### Machine 2 — Secondary Workstation (Physical Agent)
-| Component | Spec |
-|---|---|
-| CPU | Intel Core i5-8600K |
-| RAM | 8 GB |
-| GPU | NVIDIA GTX 1660 |
-| OS | Ubuntu 24.04 LTS (dual boot — bare metal) |
-| Role | Physical Wazuh agent — monitored Linux endpoint |
-
 ---
 
 ## 🏗️ Architecture
@@ -121,18 +112,31 @@ File hashes from FIM alerts are automatically checked against VirusTotal:
 
 ## 🎯 Attack Scenarios & Detection Results
 
-### Scenario 1 — SSH Brute Force (Hydra)
-**Attack:** Hydra launched 200 login attempts from Kali VM against the physical Linux agent over real LAN.  
-**Detection:** Wazuh rule `5763` triggered after 8 failed attempts in 10 seconds.  
-**Response:** Attacker IP automatically blocked via `firewall-drop` Active Response.
+### Scenario X — SSH Brute Force (Hydra)
+**Attack:** Hydra launched login attempts against the Linux agent over SSH.
+```bash
+# Brute force SSH against Linux agent
+hydra -l root -P /usr/share/wordlists/rockyou.txt -t 4 ssh://
+```
+**Detection:** Multiple failed SSH authentication attempts
+**Result:** Alert — *"SSH brute force attack detected"* — source IP and attempt count logged to dashboard.
+<img width="1652" height="442" alt="image" src="https://github.com/user-attachments/assets/24952491-f2b8-43bf-b4cc-47fe92458389" />
+<img width="650" height="245" alt="image" src="https://github.com/user-attachments/assets/c713571b-ecfa-4dfb-95b7-cbdc036b449d" />
 
+
+---
+
+Scenario X — Directory Fuzzing (ffuf)
+**Attack:** ffuf used to discover hidden directories and files on the Apache web server.
+```bash
+# Directory fuzzing with dirb wordlist
+ffuf -u http:///FUZZ -w /usr/share/wordlists/dirb/big.txt
 ```
-Alert Level: 10
-Rule: Authentication brute force (5763)
-Source IP: 192.168.1.30 (Kali VM)
-Target: 192.168.1.40 (physical agent)
-Action: IP blocked for 600 seconds
-```
+**Detection:** Large number of HTTP 400 errors from same source IP 
+**Result:** Alert — *"Multiple web server 400 error codes from same source IP"* — Level 10.
+
+<img width="1632" height="437" alt="image" src="https://github.com/user-attachments/assets/9418cc2b-e448-4ba1-a76f-dda6bb84cc41" />
+<img width="658" height="144" alt="image" src="https://github.com/user-attachments/assets/af74e038-2043-4be7-bb01-c0e6c771fbbb" />
 
 ---
 
@@ -247,18 +251,21 @@ use my .conf file for linux
 #Directory Fuzzing (ffuf) with dirb wordlist
 
 ffuf -u http:///FUZZ -w /usr/share/wordlists/dirb/big.txt
-
+```
 <img width="1632" height="437" alt="image" src="https://github.com/user-attachments/assets/9418cc2b-e448-4ba1-a76f-dda6bb84cc41" />
 <img width="658" height="144" alt="image" src="https://github.com/user-attachments/assets/af74e038-2043-4be7-bb01-c0e6c771fbbb" />
-
+```bash
 # Brute force SSH against physical agent
 hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.40
+```
+<img width="1652" height="442" alt="image" src="https://github.com/user-attachments/assets/24952491-f2b8-43bf-b4cc-47fe92458389" />
+<img width="650" height="245" alt="image" src="https://github.com/user-attachments/assets/c713571b-ecfa-4dfb-95b7-cbdc036b449d" />
 
 # Port scan physical agent
 nmap -sS -p- 192.168.1.40
+( You can use -t argument to control scan speed (t1=slowest/stealthy, t5=fastest)
 
-# Simulate privilege escalation (run on physical agent)
-sudo echo "attacker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 ```
 
 ---
