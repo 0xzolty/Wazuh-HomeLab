@@ -244,6 +244,13 @@ use my .conf file for linux
 
 ### Step 6 — Run Attack Simulations (from Kali VM)
 ```bash
+#Directory Fuzzing (ffuf) with dirb wordlist
+
+ffuf -u http:///FUZZ -w /usr/share/wordlists/dirb/big.txt
+
+<img width="1632" height="437" alt="image" src="https://github.com/user-attachments/assets/9418cc2b-e448-4ba1-a76f-dda6bb84cc41" />
+<img width="658" height="144" alt="image" src="https://github.com/user-attachments/assets/af74e038-2043-4be7-bb01-c0e6c771fbbb" />
+
 # Brute force SSH against physical agent
 hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.40
 
