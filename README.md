@@ -260,6 +260,7 @@ hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.40
 ```
 <img width="1652" height="442" alt="image" src="https://github.com/user-attachments/assets/24952491-f2b8-43bf-b4cc-47fe92458389" />
 <img width="650" height="245" alt="image" src="https://github.com/user-attachments/assets/c713571b-ecfa-4dfb-95b7-cbdc036b449d" />
+
 ```bash
 # Port scan physical agent
 nmap -sS -p- 192.168.1.40
