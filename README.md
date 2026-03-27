@@ -78,7 +78,7 @@ Home Router (192.168.1.1)
 | `wazuh-server`  | Wazuh Manager + Dashboard | Ubuntu 24.04 LTS  | Virtual Machine             |
 | `kali-attacker` | Attack simulation         | Kali Linux 2025.x | Virtual Machine             |
 | `windows-agent` | Monitored endpoint        | Windows 11        | **Physical (host machine)** |
-| `linux-agent`   | Monitored endpoint        | Ubuntu 24.04 LTS  | **Physical (bare metal)**   |
+| `linux-agent`   | Monitored endpoint        | Ubuntu 24.04 LTS  | **Physical **               |
 
 
 ## ⚙️ Configuration Highlights
@@ -91,18 +91,6 @@ Configured to monitor critical Linux paths in real time:
   <directories check_all="yes" realtime="yes">/etc,/usr/bin,/usr/sbin</directories>
   <directories check_all="yes" realtime="yes">/bin,/sbin,/boot</directories>
 </syscheck>
-```
-
-### 2. Custom Detection Rules
-Extended default ruleset to catch privilege escalation attempts:
-
-```xml
-<rule id="100001" level="12">
-  <if_sid>5402</if_sid>
-  <match>sudo</match>
-  <description>Privilege escalation attempt via sudo</description>
-  <group>privilege_escalation,</group>
-</rule>
 ```
 
 ### 3. Active Response — Automatic IP Block
@@ -242,23 +230,17 @@ sudo systemctl enable apache2
 sudo systemctl start apache2
 sudo cp index.html /var/www/html/index.html
 
+Add FIM — Monitor web server and system files
+
 sudo systemctl restart wazuh-agent
 
 use my .conf file for linux 
 ```
-## Configure FIM — Monitor web server and system files
-Add inside existing `<syscheck>` block in `/var/ossec/etc/ossec.conf`:
-```xml
-<directories check_all="yes" realtime="yes">/etc,/var/www/html</directories>
-```
+
 <img width="1190" height="774" alt="image" src="https://github.com/user-attachments/assets/45721be5-db73-4f6f-98b9-80daf8d353ee" />
 <img width="1647" height="45" alt="image" src="https://github.com/user-attachments/assets/20ce18d4-95c8-4f1d-a986-d39dd63a71a7" />
 
-### Step 5 — Apply Custom Rules
-```bash
-sudo cp config/custom-rules.xml /var/ossec/etc/rules/
-sudo systemctl restart wazuh-manager
-```
+
 
 ### Step 6 — Run Attack Simulations (from Kali VM)
 ```bash
