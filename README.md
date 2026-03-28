@@ -36,7 +36,7 @@ This lab runs across **two physical machines** connected to the same home router
 | RAM | 32 GB |
 | GPU | AMD RX 9070 |
 | OS | Windows 11 (host) |
-| Virtualization | VirtualBox — runs Wazuh Server VM + Kali Linux VM |
+| Virtualization | VirtualBox — runs Wazuh Server VM + Kali Linux VM + Ubuntu Linux agent VM|
 
 ---
 
