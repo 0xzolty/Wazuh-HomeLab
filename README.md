@@ -83,7 +83,7 @@ ffuf -u http:///192.168.0.0/FUZZ -w /usr/share/wordlists/dirb/big.txt
 ### Scenario 3 — Web Login Brute Force (Hydra)
 **Attack:** Hydra used to brute force the login form on a custom PHP login page running on Apache.
 ```bash
-hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.126 http-post-form "/login.php:username=^USER^&password=^PASS^:401"
+hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.0 http-post-form "/login.php:username=^USER^&password=^PASS^:401"
 ```
 **Detection:** Multiple HTTP 401 responses from same source IP detected in Apache access logs → Wazuh alert triggered automatically.  
 **Result:** Alert — *"Web server 400 error code"* `.
