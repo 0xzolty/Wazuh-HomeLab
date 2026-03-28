@@ -68,7 +68,7 @@ hydra -l root -P /usr/share/wordlists/rockyou.txt -t 4 ssh://
 **Attack:** ffuf used to discover hidden directories and files on the Apache web server.
 ```bash
 # Directory fuzzing with dirb wordlist
-ffuf -u http:///DVWA/FUZZ -w /usr/share/wordlists/dirb/big.txt
+ffuf -u http:///192.168.0.0/FUZZ -w /usr/share/wordlists/dirb/big.txt
 ```
 **Detection:** Large number of HTTP 400 errors from same source IP 
 **Result:** Alert — *"Multiple web server 400 error codes from same source IP"* — Level 10.
