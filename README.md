@@ -103,7 +103,7 @@ hydra -l root -P /usr/share/wordlists/rockyou.txt -t 4 ssh://
 
 ---
 
-Scenario 2 — Directory Fuzzing (ffuf)
+### Scenario 2 — Directory Fuzzing (ffuf)
 **Attack:** ffuf used to discover hidden directories and files on the Apache web server.
 ```bash
 # Directory fuzzing with dirb wordlist
