@@ -76,7 +76,7 @@ ffuf -u http:///DVWA/FUZZ -w /usr/share/wordlists/dirb/big.txt
 <img width="1632" height="437" alt="image" src="https://github.com/user-attachments/assets/9418cc2b-e448-4ba1-a76f-dda6bb84cc41" />
 <img width="658" height="144" alt="image" src="https://github.com/user-attachments/assets/af74e038-2043-4be7-bb01-c0e6c771fbbb" />
 
----
+
 
 ---
 
@@ -90,7 +90,7 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.126 http-post-form 
 <img width="1173" height="634" alt="image" src="https://github.com/user-attachments/assets/6ac34bfc-5b4a-42a7-b6ce-c68c91117351" />
 
 
----
+
 
 ---
 ### Scenario 4 — Windows Defender Disabled
@@ -106,25 +106,12 @@ Set-MpPreference -DisableRealtimeMonitoring $false
 ```
 <img width="1634" height="167" alt="image" src="https://github.com/user-attachments/assets/b58cd860-679c-4094-a7a2-fe46216fa510" />
 
-
-## 📊 Dashboard Screenshots
-
-| View | Description |
-|---|---|
-| `screenshots/overview.png` | Security events overview — 24h |
-| `screenshots/brute_force_alert.png` | Brute force detection + active response log |
-| `screenshots/fim_alert.png` | File integrity alert with diff |
-| `screenshots/virustotal.png` | VirusTotal enrichment on suspicious file |
-
----
-
 ## 🚀 How to Reproduce
 
 ### Prerequisites
-- Two physical machines connected to the same LAN
-- VirtualBox 7.x installed on the primary machine
-- Ubuntu 24.04 LTS ISO + Kali Linux 2025.x ISO
-- Ubuntu 24.04 LTS installed bare metal on the secondary machine (dual boot)
+- One physical machine (host) running VMware Workstation
+- Ubuntu 24.04 LTS Server ISO + Kali Linux 2025.x ISO
+- All virtual machines running on VMware with Bridged network adapter
 
 ### Step 1 — Install Wazuh Server (Primary machine VM)
 ```bash
@@ -180,11 +167,7 @@ sudo systemctl restart wazuh-agent
 
 
 ### Step 6 — Run Attack Simulations (from Kali VM)
-```bash
-# Port scan physical agent
-nmap -sS -p- 192.168.1.40
-( You can use -t argument to control scan speed (t1=slowest/stealthy, t5=fastest)
-```
+
 
 ---
 
@@ -209,19 +192,28 @@ nmap -sS -p- 192.168.1.40
 
 ## 📚 What I Learned
 
-- How a SIEM ingests and normalizes logs from heterogeneous endpoints across a real network
-- How Active Response works as an automated first line of defense
-- Difference between virtual and physical (bare metal) agent deployment
-- Integrating threat intelligence APIs into the alerting pipeline
-- Network-level considerations when connecting physical machines to a SIEM
+Building this lab from scratch gave me hands-on experience with tools and concepts 
+that are used daily in real SOC environments:
 
+- **SIEM fundamentals** — how Wazuh collects and processes logs from different 
+  operating systems (Linux and Windows) and displays them in one central dashboard
+- **Agent deployment and configuration** — deploying and tuning Wazuh agents on 
+  both Linux and Windows, including custom `ossec.conf` configuration for different 
+  log sources (Apache, Sysmon, Auditd, Windows Defender)
+- **Attack tool usage** — practical experience with Hydra, ffuf, Burp Suite 
+  and understanding how each attack appears in logs and what signatures it leaves
+- **Log analysis** — reading and interpreting raw logs from auth.log, Apache 
+  access logs, Windows Event Logs and Sysmon to understand what happened during an attack
+- **False positive investigation** — identifying and triaging alerts that turned out 
+  to be legitimate system behavior (e.g. OneDrive process injection, AppArmor denials)
+- **General SOC workflow** — understanding the full cycle: attack happens → logs 
+  generated → SIEM collects them → alert triggered → analyst investigates
 ---
 
 ## 🗺️ Future Improvements
 
 - [ ] Add Suricata IDS for network-level detection (NIDS)
-- [ ] Integrate Shuffle SOAR for automated playbook execution
-- [ ] Add TheHive for incident management and case tracking
+- [ ] Integrate SOARs for automated execution
 - [ ] Simulate lateral movement between endpoints
 - [ ] Set up Slack/email alerting for critical severity events
 - [ ] Map all attack scenarios to MITRE ATT&CK framework
