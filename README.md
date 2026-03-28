@@ -107,7 +107,7 @@ hydra -l root -P /usr/share/wordlists/rockyou.txt -t 4 ssh://
 **Attack:** ffuf used to discover hidden directories and files on the Apache web server.
 ```bash
 # Directory fuzzing with dirb wordlist
-ffuf -u http:///FUZZ -w /usr/share/wordlists/dirb/big.txt
+ffuf -u http:///DVWA/FUZZ -w /usr/share/wordlists/dirb/big.txt
 ```
 **Detection:** Large number of HTTP 400 errors from same source IP 
 **Result:** Alert — *"Multiple web server 400 error codes from same source IP"* — Level 10.
@@ -209,10 +209,11 @@ sudo systemctl start auditd
 sudo apt install apache2 -y
 sudo systemctl enable apache2
 sudo systemctl start apache2
-sudo cp index.html /var/www/html/index.html
 
 Add FIM — Monitor web server and system files
 use my .conf file for linux 
+
+Install DVWA to test server event logs  (https://github.com/digininja/DVWA)
 
 sudo systemctl restart wazuh-agent 
 ```
