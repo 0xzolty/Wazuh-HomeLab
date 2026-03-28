@@ -124,10 +124,16 @@ ffuf -u http:///DVWA/FUZZ -w /usr/share/wordlists/dirb/big.txt
 
 ---
 
-### Scenario 3 — Privilege Escalation
-**Attack:** New user added to `/etc/sudoers` manually on the physical agent.  
-**Detection:** FIM alert triggered on `/etc/sudoers` modification + custom rule `100001`.  
-**Result:** Level 12 critical alert with file diff and responsible user.
+### Scenario X — Web Login Brute Force (Hydra + DVWA)
+**Attack:** Hydra used to brute force the login form on DVWA (Damn Vulnerable Web Application) running on Apache.
+```bash
+hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.126 http-post-form "/DVWA/login.php:username=^USER^&password=^PASS^&Login=Login&user_token=TOKEN:Login failed"
+```
+**Detection:** Multiple POST requests to `/DVWA/login.php` from same source IP detected in Apache access logs → Wazuh alert triggered.  
+**Result:** Alert — *"	
+Web server 400 error code.`.
+<img width="1173" height="634" alt="image" src="https://github.com/user-attachments/assets/6ac34bfc-5b4a-42a7-b6ce-c68c91117351" />
+
 
 ---
 
