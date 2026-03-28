@@ -124,14 +124,13 @@ ffuf -u http:///DVWA/FUZZ -w /usr/share/wordlists/dirb/big.txt
 
 ---
 
-### Scenario X — Web Login Brute Force (Hydra + DVWA)
-**Attack:** Hydra used to brute force the login form on DVWA (Damn Vulnerable Web Application) running on Apache.
+### Scenario X — Web Login Brute Force (Hydra)
+**Attack:** Hydra used to brute force the login form on a custom PHP login page running on Apache.
 ```bash
-hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.126 http-post-form "/DVWA/login.php:username=^USER^&password=^PASS^&Login=Login&user_token=TOKEN:Login failed"
+hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.126 http-post-form "/login.php:username=^USER^&password=^PASS^:401"
 ```
-**Detection:** Multiple POST requests to `/DVWA/login.php` from same source IP detected in Apache access logs → Wazuh alert triggered.  
-**Result:** Alert — *"	
-Web server 400 error code.`.
+**Detection:** Multiple HTTP 401 responses from same source IP detected in Apache access logs → Wazuh alert triggered automatically.  
+**Result:** Alert — *"Web server 400 error code"* `.
 <img width="1173" height="634" alt="image" src="https://github.com/user-attachments/assets/6ac34bfc-5b4a-42a7-b6ce-c68c91117351" />
 
 
@@ -219,7 +218,7 @@ sudo systemctl start apache2
 Add FIM — Monitor web server and system files
 use my .conf file for linux 
 
-Install DVWA to test server event logs  (https://github.com/digininja/DVWA)
+Add login.php to /var/www/html
 
 sudo systemctl restart wazuh-agent 
 ```
