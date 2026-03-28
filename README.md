@@ -29,7 +29,7 @@ Unlike typical portfolio projects that rely entirely on virtual machines, this l
 
 This lab runs on a **physical host machine** running multiple virtual machines connected via a home router (LAN). No cloud services or external hosting required.
 
-### Machine 1 — Primary Workstation (Wazuh Server + Attacker)
+### Machine  — Primary Workstation (Wazuh Server + Attacker)
 | Component | Spec |
 |---|---|
 | CPU | AMD Ryzen 5 7600 |
@@ -47,45 +47,6 @@ This lab runs on a **physical host machine** running multiple virtual machines c
 | `kali-attacker` | Attack simulation         | Kali Linux 2025.x | Virtual Machine             |
 | `windows-agent` | Monitored endpoint + Sysmon | Windows 11      | **Physical (host machine)** |
 | `linux-agent`   | Monitored endpoint + Apache | Ubuntu 24.04 LTS | Virtual Machine            |
-
-
-## ⚙️ Configuration Highlights
-
-### 1. File Integrity Monitoring (FIM)
-Configured to monitor critical Linux paths in real time:
-
-```xml
-<syscheck>
-  <directories check_all="yes" realtime="yes">/etc,/usr/bin,/usr/sbin</directories>
-  <directories check_all="yes" realtime="yes">/bin,/sbin,/boot</directories>
-</syscheck>
-```
-
-### 3. Active Response — Automatic IP Block
-SSH brute force triggers automatic firewall block via `iptables`:
-
-```xml
-<active-response>
-  <command>firewall-drop</command>
-  <location>local</location>
-  <rules_id>5763</rules_id>
-  <timeout>600</timeout>
-</active-response>
-```
-
-### 4. VirusTotal Integration
-File hashes from FIM alerts are automatically checked against VirusTotal:
-
-```xml
-<integration>
-  <n>virustotal</n>
-  <api_key>YOUR_API_KEY</api_key>
-  <rule_id>554,550</rule_id>
-  <alert_format>json</alert_format>
-</integration>
-```
-
----
 
 ## 🎯 Attack Scenarios & Detection Results
 
@@ -117,14 +78,9 @@ ffuf -u http:///DVWA/FUZZ -w /usr/share/wordlists/dirb/big.txt
 
 ---
 
-### Scenario 2 — Port Scanning (nmap)
-**Attack:** Full TCP SYN scan (`nmap -sS -p-`) from Kali VM against the physical Linux agent.  
-**Detection:** Wazuh correlated multiple connection drops → rule `40111` triggered.  
-**Result:** Alert with source IP, scan type, and timestamp logged to dashboard.
-
 ---
 
-### Scenario X — Web Login Brute Force (Hydra)
+### Scenario 3 — Web Login Brute Force (Hydra)
 **Attack:** Hydra used to brute force the login form on a custom PHP login page running on Apache.
 ```bash
 hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.126 http-post-form "/login.php:username=^USER^&password=^PASS^:401"
@@ -136,13 +92,8 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.126 http-post-form 
 
 ---
 
-### Scenario 4 — Malicious File Drop (VirusTotal)
-**Attack:** Known malware sample (EICAR test file) dropped into monitored directory on physical agent.  
-**Detection:** FIM detected new file → hash sent to VirusTotal → flagged as malicious.  
-**Result:** Alert enriched with VT detection ratio (e.g., `58/72 engines`).
-
 ---
-### Scenario X — Windows Defender Disabled
+### Scenario 4 — Windows Defender Disabled
 **Attack:** Windows Defender real-time protection disabled manually — simulating an attacker trying to disable endpoint protection before deploying malware.
 ```powershell
 Set-MpPreference -DisableRealtimeMonitoring $true
