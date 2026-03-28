@@ -89,7 +89,7 @@ File hashes from FIM alerts are automatically checked against VirusTotal:
 
 ## 🎯 Attack Scenarios & Detection Results
 
-### Scenario X — SSH Brute Force (Hydra)
+### Scenario 1 — SSH Brute Force (Hydra)
 **Attack:** Hydra launched login attempts against the Linux agent over SSH.
 ```bash
 # Brute force SSH against Linux agent
@@ -103,7 +103,7 @@ hydra -l root -P /usr/share/wordlists/rockyou.txt -t 4 ssh://
 
 ---
 
-Scenario X — Directory Fuzzing (ffuf)
+Scenario 2 — Directory Fuzzing (ffuf)
 **Attack:** ffuf used to discover hidden directories and files on the Apache web server.
 ```bash
 # Directory fuzzing with dirb wordlist
