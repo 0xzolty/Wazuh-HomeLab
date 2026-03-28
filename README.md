@@ -27,7 +27,7 @@ Unlike typical portfolio projects that rely entirely on virtual machines, this l
 
 ## 🖥️ Hardware Setup
 
-This lab runs across **two physical machines** connected to the same home router (LAN). No cloud services or external hosting required.
+This lab runs on a **physical host machine** running multiple virtual machines connected via a home router (LAN). No cloud services or external hosting required.
 
 ### Machine 1 — Primary Workstation (Wazuh Server + Attacker)
 | Component | Spec |
