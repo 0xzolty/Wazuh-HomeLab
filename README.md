@@ -36,7 +36,7 @@ This lab runs on a **physical host machine** running multiple virtual machines c
 | RAM | 32 GB |
 | GPU | AMD RX 9070 |
 | OS | Windows 11 (host) |
-| Virtualization | VirtualBox — runs Wazuh Server VM + Kali Linux VM + Ubuntu Linux agent VM|
+| Virtualization | VMware — runs Wazuh Server VM + Kali Linux VM + Ubuntu Linux agent VM|
 
 ---
 
