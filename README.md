@@ -215,7 +215,7 @@ that are used daily in real SOC environments:
 - [ ] Simulate lateral movement between endpoints
 - [ ] Set up Slack/email alerting for critical severity events
 - [ ] Map all attack scenarios to MITRE ATT&CK framework
-- [ ] Deploy a honeypot (OpenCanary) to catch internal recon
+- [ ] Automate Wazuh agent deployment across endpoints using Ansible from the Wazuh Server VM
 
 ---
 
