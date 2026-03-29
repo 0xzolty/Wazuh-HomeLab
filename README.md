@@ -17,11 +17,11 @@ This project simulates a **mini Security Operations Center (SOC)** using open-so
 Unlike typical portfolio projects that rely entirely on virtual machines, this lab uses a **physical bare-metal endpoint** as a monitored agent, making the network traffic and detection scenarios more realistic and closer to real enterprise environments.
 
 **Key focus areas:**
-- Centralized log collection from a physical Linux endpoint
-- Real-time alert generation based on custom detection rules
-- Automated Active Response (IP blocking) triggered by detected attacks
-- Threat enrichment via VirusTotal API integration
-- File Integrity Monitoring (FIM) for critical system paths
+- Centralized log collection from Linux and Windows endpoints (Apache, Sysmon, Auditd, Windows Defender)
+- Real-time alert generation using default and custom Wazuh detection rules
+- File Integrity Monitoring (FIM) for critical system paths and web server files
+- Web attack simulation and detection (directory fuzzing, login brute force)
+- Deep Windows endpoint telemetry using Sysmon with sysmon-modular configuration
 
 ---
 
