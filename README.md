@@ -183,7 +183,6 @@ sudo systemctl restart wazuh-agent
 | **ffuf** | Web directory fuzzing |
 | **nmap** | Network port scanning |
 | **Auditd** | Linux command logging |
-| **VirusTotal API** | Threat intelligence enrichment |
 | **VirtualBox / VMware** | Virtualization on primary machine |
 | **Ubuntu 24.04 LTS / Kali 2025.x / Windows 11** | Operating systems |
 
@@ -224,7 +223,6 @@ that are used daily in real SOC environments:
 
 - [Wazuh Official Documentation](https://documentation.wazuh.com)
 - [Wazuh Active Response Guide](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/)
-- [VirusTotal API Docs](https://developers.virustotal.com/reference)
 - [MITRE ATT&CK Framework](https://attack.mitre.org)
 
 ---
