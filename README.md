@@ -182,7 +182,6 @@ sudo systemctl restart wazuh-agent
 | **Hydra** | SSH brute force simulation |
 | **ffuf** | Web directory fuzzing |
 | **nmap** | Network port scanning |
-| **Burp Suite** | Web login brute force via Intruder |
 | **Auditd** | Linux command logging |
 | **VirusTotal API** | Threat intelligence enrichment |
 | **VirtualBox / VMware** | Virtualization on primary machine |
