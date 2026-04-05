@@ -175,7 +175,6 @@ sudo systemctl restart wazuh-agent
 | Tool | Purpose |
 |---|---|
 | **Wazuh 4.14** | SIEM — log collection, alerting |
-| **OpenSearch + Dashboards** | Log indexing and visualization |
 | **Sysmon + sysmon-modular** | Deep Windows endpoint telemetry |
 | **Windows Defender** | Endpoint AV — logs forwarded to Wazuh |
 | **Apache2** | Web server — attack target for web-based scenarios |
