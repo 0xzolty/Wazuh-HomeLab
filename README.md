@@ -179,7 +179,7 @@ sudo systemctl restart wazuh-agent
 | **Sysmon + sysmon-modular** | Deep Windows endpoint telemetry |
 | **Windows Defender** | Endpoint AV — logs forwarded to Wazuh |
 | **Apache2** | Web server — attack target for web-based scenarios |
-| **Hydra** | SSH brute force simulation |
+| **Hydra** | SSH / Password brute force simulation |
 | **ffuf** | Web directory fuzzing |
 | **nmap** | Network port scanning |
 | **Auditd** | Linux command logging |
