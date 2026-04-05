@@ -113,7 +113,7 @@ Set-MpPreference -DisableRealtimeMonitoring $false
 - Ubuntu 24.04 LTS Server ISO + Kali Linux 2025.x ISO
 - All virtual machines running on VMware with Bridged network adapter
 
-### Step 1 — Install Wazuh Server (Primary machine VM)
+### Step 1 — Install Wazuh Server (Primary machine VM) https://documentation.wazuh.com/current/quickstart.html
 ```bash
 curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 ```
