@@ -169,7 +169,7 @@ sudo systemctl restart wazuh-agent
 ### Step 4 — Run Attack Simulations (from Kali VM)
 
 
-### Step 5 — Automate Agent Deployment with Ansible (Optional — for scaling)
+### Step 5 — Automate Agent Deployment with Ansible (Optional - for scaling)
 Instead of installing agents manually on each machine, use Ansible to deploy Wazuh agents across all endpoints at once.
 
 ```bash
