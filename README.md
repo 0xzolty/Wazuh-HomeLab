@@ -140,23 +140,23 @@ sudo systemctl enable wazuh-agent
 sudo systemctl start wazuh-agent
 
 
-## Add Auditd — log every command
+# Add Auditd — log every command
 
 sudo apt install auditd -y
 sudo systemctl enable auditd
 sudo systemctl start auditd
 
 
-## Deploy Apache Web Server (attack target)
+# Deploy Apache Web Server (attack target)
 
 sudo apt install apache2 -y
 sudo systemctl enable apache2
 sudo systemctl start apache2
 
-Add FIM — Monitor web server and system files
+# Add FIM — Monitor web server and system files
 use my .conf file for linux 
 
-Add login.php to /var/www/html
+# Add login.php to /var/www/html
 
 sudo systemctl restart wazuh-agent 
 ```
@@ -173,13 +173,13 @@ sudo systemctl restart wazuh-agent
 Instead of installing agents manually on each machine, use Ansible to deploy Wazuh agents across all endpoints at once.
 
 ```bash
-instal ansible on wazuh server 
+# instal ansible on wazuh server 
 sudo apt install ansible -y
-create ansible directory and enter it 
-sudo mkdir ~/ansible 
+# create ansible directory and enter it 
+mkdir ~/ansible 
 cd ~/ansible  
-create inventory.ini - list of machines running wazuh agents 
-sudo touch inventory.ini
+# create inventory.ini - list of machines running wazuh agents 
+touch inventory.ini
 
 ```
 <img width="812" height="285" alt="image" src="https://github.com/user-attachments/assets/e4c1b412-65a8-42e2-9e08-d44a85898446" />
