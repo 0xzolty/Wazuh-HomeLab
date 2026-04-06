@@ -180,7 +180,11 @@ mkdir ~/ansible
 cd ~/ansible  
 # create inventory.ini - list of machines running wazuh agents 
 touch inventory.ini
-
+# Add agent IP to inventory
+nano inventory.ini 
+# inside add : 
+#[linux-agents]
+#and list of ips u want to deploy wazuh agents on
 ```
 <img width="812" height="285" alt="image" src="https://github.com/user-attachments/assets/e4c1b412-65a8-42e2-9e08-d44a85898446" />
 
