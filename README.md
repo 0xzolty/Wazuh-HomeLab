@@ -1,4 +1,4 @@
-# 🛡️ Home SOC Lab — Automated Threat Detection with Wazuh SIEM
+# 🛡️ Home SOC Lab - Automated Threat Detection with Wazuh SIEM
 
 > A hands-on Security Operations Center simulation built on a physical machine running multiple virtual machines connected via a home LAN.  
 > Demonstrates real-world detection of brute force attacks, privilege escalation, web attacks, file integrity violations and more — with automated response.
@@ -29,14 +29,14 @@ Unlike typical portfolio projects that rely entirely on virtual machines, this l
 
 This lab runs on a **physical host machine** running multiple virtual machines connected via a home router (LAN). No cloud services or external hosting required.
 
-### Machine  — Primary Workstation (Wazuh Server + Attacker)
+### Machine - Primary Workstation (Wazuh Server + Attacker)
 | Component | Spec |
 |---|---|
 | CPU | AMD Ryzen 5 7600 |
 | RAM | 32 GB |
 | GPU | AMD RX 9070 |
 | OS | Windows 11 (host) |
-| Virtualization | VMware — runs Wazuh Server VM + Kali Linux VM + Ubuntu Linux agent VM|
+| Virtualization | VMware - runs Wazuh Server VM + Kali Linux VM + Ubuntu Linux agent VM|
 
 ---
 
@@ -57,21 +57,21 @@ This lab runs on a **physical host machine** running multiple virtual machines c
 hydra -l root -P /usr/share/wordlists/rockyou.txt -t 4 ssh://
 ```
 **Detection:** Multiple failed SSH authentication attempts
-**Result:** Alert — *"SSH brute force attack detected"* — source IP and attempt count logged to dashboard.
+**Result:** Alert - *"SSH brute force attack detected"* — source IP and attempt count logged to dashboard.
 <img width="1652" height="442" alt="image" src="https://github.com/user-attachments/assets/24952491-f2b8-43bf-b4cc-47fe92458389" />
 <img width="650" height="245" alt="image" src="https://github.com/user-attachments/assets/c713571b-ecfa-4dfb-95b7-cbdc036b449d" />
 
 
 ---
 
-### Scenario 2 — Directory Fuzzing (ffuf)
+### Scenario 2 - Directory Fuzzing (ffuf)
 **Attack:** ffuf used to discover hidden directories and files on the Apache web server.
 ```bash
 # Directory fuzzing with dirb wordlist
 ffuf -u http:///192.168.0.0/FUZZ -w /usr/share/wordlists/dirb/big.txt
 ```
 **Detection:** Large number of HTTP 400 errors from same source IP 
-**Result:** Alert — *"Multiple web server 400 error codes from same source IP"* — Level 10.
+**Result:** Alert - *"Multiple web server 400 error codes from same source IP"* — Level 10.
 
 <img width="1632" height="437" alt="image" src="https://github.com/user-attachments/assets/9418cc2b-e448-4ba1-a76f-dda6bb84cc41" />
 <img width="658" height="144" alt="image" src="https://github.com/user-attachments/assets/af74e038-2043-4be7-bb01-c0e6c771fbbb" />
@@ -93,13 +93,13 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.0 http-post-form "/
 
 
 ---
-### Scenario 4 — Windows Defender Disabled
-**Attack:** Windows Defender real-time protection disabled manually — simulating an attacker trying to disable endpoint protection before deploying malware.
+### Scenario 4 - Windows Defender Disabled
+**Attack:** Windows Defender real-time protection disabled manually - simulating an attacker trying to disable endpoint protection before deploying malware.
 ```powershell
 Set-MpPreference -DisableRealtimeMonitoring $true
 ```
 **Detection:** Windows Defender event forwarded to Wazuh.  
-**Result:** Alert — *"Windows Defender real-time protection disabled"*.  
+**Result:** Alert - *"Windows Defender real-time protection disabled"*.  
 **Response:** Re-enable protection after test:
 ```powershell
 Set-MpPreference -DisableRealtimeMonitoring $false
@@ -113,14 +113,14 @@ Set-MpPreference -DisableRealtimeMonitoring $false
 - Ubuntu 24.04 LTS Server ISO + Kali Linux 2025.x ISO
 - All virtual machines running on VMware with Bridged network adapter
 
-### Step 1 — Install Wazuh Server (Primary machine VM) https://documentation.wazuh.com/current/quickstart.html
+### Step 1 - Install Wazuh Server (Primary machine VM) https://documentation.wazuh.com/current/quickstart.html
 ```bash
 curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 ```
 To open dashboard paste your ip in browser
 <img width="1646" height="900" alt="image" src="https://github.com/user-attachments/assets/739b9e35-6ae2-4d07-a31f-a92c7d214566" />
 
-### Step 2 — Deploy and configure Windows Agent (Physical main machine)
+### Step 2 - Deploy and configure Windows Agent (Physical main machine)
 ```bash
 Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.4-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='**SERVER IP' WAZUH_AGENT_NAME='**NAME'
 Manually verify the <address> field in ossec.conf. If it is set to 0.0.0.0, replace it with the correct Wazuh manager IP or hostname.
@@ -132,7 +132,7 @@ Use my .conf file for windows
 <img width="1620" height="691" alt="image" src="https://github.com/user-attachments/assets/4d2958b1-42dc-43ed-a247-49006a60230e" />
 
 
-### Step 3 — Deploy and configure Linux Agent/Server
+### Step 3 - Deploy and configure Linux Agent/Server
 ```bash
 wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.4-1_amd64.deb && sudo WAZUH_MANAGER='192.168.0.236' dpkg -i ./wazuh-agent_4.14.4-1_amd64.deb
 sudo systemctl daemon-reload
@@ -140,7 +140,7 @@ sudo systemctl enable wazuh-agent
 sudo systemctl start wazuh-agent
 
 
-# Add Auditd — log every command
+# Add Auditd - log every command
 
 sudo apt install auditd -y
 sudo systemctl enable auditd
@@ -153,7 +153,7 @@ sudo apt install apache2 -y
 sudo systemctl enable apache2
 sudo systemctl start apache2
 
-# Add FIM — Monitor web server and system files
+# Add FIM - Monitor web server and system files
 use my .conf file for linux 
 
 # Add login.php to /var/www/html
@@ -166,10 +166,10 @@ sudo systemctl restart wazuh-agent
 
 
 
-### Step 4 — Run Attack Simulations (from Kali VM)
+### Step 4 - Run Attack Simulations (from Kali VM)
 
 
-### Step 5 — Automate Agent Deployment with Ansible (Optional - for scaling)
+### Step 5 - Automate Agent Deployment with Ansible (Optional - for scaling)
 Instead of installing agents manually on each machine, use Ansible to deploy Wazuh agents across all endpoints at once.
 
 ```bash
@@ -193,10 +193,10 @@ nano inventory.ini
 ## 🛠️ Tools & Technologies
 | Tool | Purpose |
 |---|---|
-| **Wazuh 4.14** | SIEM — log collection, alerting |
+| **Wazuh 4.14** | SIEM - log collection, alerting |
 | **Sysmon + sysmon-modular** | Deep Windows endpoint telemetry |
-| **Windows Defender** | Endpoint AV — logs forwarded to Wazuh |
-| **Apache2** | Web server — attack target for web-based scenarios |
+| **Windows Defender** | Endpoint AV - logs forwarded to Wazuh |
+| **Apache2** | Web server - attack target for web-based scenarios |
 | **Hydra** | SSH / Password brute force simulation |
 | **ffuf** | Web directory fuzzing |
 | **nmap** | Network port scanning |
@@ -211,18 +211,18 @@ nano inventory.ini
 Building this lab from scratch gave me hands-on experience with tools and concepts 
 that are used daily in real SOC environments:
 
-- **SIEM fundamentals** — how Wazuh collects and processes logs from different 
+- **SIEM fundamentals** - how Wazuh collects and processes logs from different 
   operating systems (Linux and Windows) and displays them in one central dashboard
-- **Agent deployment and configuration** — deploying and tuning Wazuh agents on 
+- **Agent deployment and configuration** - deploying and tuning Wazuh agents on 
   both Linux and Windows, including custom `ossec.conf` configuration for different 
   log sources (Apache, Sysmon, Auditd, Windows Defender)
-- **Attack tool usage** — practical experience with Hydra, ffuf, Burp Suite 
+- **Attack tool usage** - practical experience with Hydra, ffuf, Burp Suite 
   and understanding how each attack appears in logs and what signatures it leaves
-- **Log analysis** — reading and interpreting raw logs from auth.log, Apache 
+- **Log analysis** - reading and interpreting raw logs from auth.log, Apache 
   access logs, Windows Event Logs and Sysmon to understand what happened during an attack
-- **False positive investigation** — identifying and triaging alerts that turned out 
+- **False positive investigation** - identifying and triaging alerts that turned out 
   to be legitimate system behavior (e.g. OneDrive process injection, AppArmor denials)
-- **General SOC workflow** — understanding the full cycle: attack happens → logs 
+- **General SOC workflow** - understanding the full cycle: attack happens → logs 
   generated → SIEM collects them → alert triggered → analyst investigates
 ---
 
