@@ -258,8 +258,8 @@ that are used daily in real SOC environments:
 
 ## 🗺️ Future Improvements
 
-- [*] Add Suricata IDS for network-level detection (NIDS)
-- [ ] Integrate SOARs for automated execution
+- [x] Add Suricata IDS for network-level detection (NIDS)
+- [ ] Integrate SOARs for automated execution 
 - [ ] Simulate lateral movement between endpoints
 - [ ] Set up Slack/email alerting for critical severity events
 - [ ] Map all attack scenarios to MITRE ATT&CK framework
