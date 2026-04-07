@@ -167,9 +167,11 @@ sudo nano suricata.yaml
 #Edit your interface to match machine adapter
 # Install detection rules - community rules that tell suricata what malicious traffic looks like
 sudo suricata-update
-
-
 use my .conf file for linux 
+sudo systemctl enable suricata
+sudo systemctl start suricata
+
+
 sudo systemctl restart wazuh-agent 
 
 ```
