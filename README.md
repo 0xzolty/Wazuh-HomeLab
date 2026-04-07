@@ -50,7 +50,7 @@ This lab runs on a **physical host machine** running multiple virtual machines c
 
 ## 🎯 Attack Scenarios & Detection Results
 
-### Scenario 1 — SSH Brute Force (Hydra) - T1110
+### Scenario 1 — SSH Brute Force (Hydra) -
 **Attack:** Hydra launched login attempts against the Linux agent over SSH.
 ```bash
 # Brute force SSH against Linux agent
