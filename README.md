@@ -122,7 +122,7 @@ Set-MpPreference -DisableRealtimeMonitoring $false
 ### Prerequisites
 - One physical machine (host) running VMware Workstation
 - Ubuntu 24.04 LTS Server ISO + Kali Linux 2025.x ISO
-- All virtual machines running on VMware with ** Bridged network adapter
+- All virtual machines running on VMware with Bridged network adapter  !!! 
 
 ### Step 1 - Install Wazuh Server (Primary machine VM) https://documentation.wazuh.com/current/quickstart.html
 ```bash
