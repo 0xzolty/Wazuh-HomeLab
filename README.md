@@ -1,4 +1,4 @@
-# 🛡️ Home SOC Lab - Automated Threat Detection with Wazuh SIEM
+<img width="948" height="538" alt="image" src="https://github.com/user-attachments/assets/71924486-1cf3-4817-83ff-11b9f9d3538c" /># 🛡️ Home SOC Lab - Automated Threat Detection with Wazuh SIEM
 
 > A hands-on Security Operations Center simulation built on a physical machine running multiple virtual machines connected via a home LAN.  
 > Demonstrates real-world detection of brute force attacks, privilege escalation, web attacks, file integrity violations and more — with automated response.
@@ -154,15 +154,32 @@ sudo systemctl enable apache2
 sudo systemctl start apache2
 
 # Add FIM - Monitor web server and system files
-use my .conf file for linux 
+
 
 # Add login.php to /var/www/html
 
+# Install ,configure and deploy suricat
+
+sudo apt install suricata -y 
+cd /etc/suricata 
+sudo nano suricata.yaml
+#Edit your ip range in this file for example 192.168.0.0 with mask /24 is ip range from 192.168.0.1 to 192.168.0.254
+#Edit your interface to match machine adapter
+# Install detection rules - community rules that tell suricata what malicious traffic looks like
+sudo suricata-update
+
+
+use my .conf file for linux 
 sudo systemctl restart wazuh-agent 
+
 ```
+
 
 <img width="1190" height="774" alt="image" src="https://github.com/user-attachments/assets/45721be5-db73-4f6f-98b9-80daf8d353ee" />
 <img width="1647" height="45" alt="image" src="https://github.com/user-attachments/assets/20ce18d4-95c8-4f1d-a986-d39dd63a71a7" />
+<img width="948" height="538" alt="image" src="https://github.com/user-attachments/assets/9826bd84-3dd0-4c6a-b3fb-98f98b93f06a" />
+<img width="1480" height="886" alt="image" src="https://github.com/user-attachments/assets/450f7087-a198-4a00-9afc-bd2d4ed4e7e4" />
+
 
 
 
