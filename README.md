@@ -93,9 +93,9 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.0 http-post-form "/
 ### Scenario 4 — Port Scanning (Suricata + nmap)
 **Attack:** Nmap SYN scan with service version detection from Kali.
 ```bash
-nmap -sS -sV 192.168.0.126
+nmap -sV 192.168.0.126
 ```
-**Detection:**Suricata detected Nmap User-Agent in network traffic 
+**Detection:** Suricata detected Nmap User-Agent in network traffic 
 **Result:** Alert - *"Suricata Alert - ET SCAN Possible Nmap User-Agent Observed"* `.
 <img width="1660" height="236" alt="image" src="https://github.com/user-attachments/assets/ae923eda-5ef7-42c2-b514-56ccc87f3b9a" />
 <img width="668" height="267" alt="image" src="https://github.com/user-attachments/assets/58d9d866-4f86-408d-b68b-d57502a56257" />
