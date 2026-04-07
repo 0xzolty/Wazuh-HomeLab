@@ -1,4 +1,4 @@
-<img width="948" height="538" alt="image" src="https://github.com/user-attachments/assets/71924486-1cf3-4817-83ff-11b9f9d3538c" /># 🛡️ Home SOC Lab - Automated Threat Detection with Wazuh SIEM
+# 🛡️ Home SOC Lab - Automated Threat Detection with Wazuh SIEM
 
 > A hands-on Security Operations Center simulation built on a physical machine running multiple virtual machines connected via a home LAN.  
 > Demonstrates real-world detection of brute force attacks, privilege escalation, web attacks, file integrity violations and more — with automated response.
@@ -86,14 +86,25 @@ ffuf -u http:///192.168.0.0/FUZZ -w /usr/share/wordlists/dirb/big.txt
 hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.0 http-post-form "/login.php:username=^USER^&password=^PASS^:401"
 ```
 **Detection:** Multiple HTTP 401 responses from same source IP detected in Apache access logs → Wazuh alert triggered automatically.  
-**Result:** Alert — *"Web server 400 error code"* `.
+**Result:** Alert - *"Web server 400 error code"* `.
 <img width="1173" height="634" alt="image" src="https://github.com/user-attachments/assets/6ac34bfc-5b4a-42a7-b6ce-c68c91117351" />
+
+
+### Scenario 4 — Port Scanning (Suricata + nmap)
+**Attack:** Nmap SYN scan with service version detection from Kali.
+```bash
+nmap -sS -sV 192.168.0.126
+```
+**Detection:**Suricata detected Nmap User-Agent in network traffic 
+**Result:** Alert - *"Suricata Alert - ET SCAN Possible Nmap User-Agent Observed"* `.
+<img width="1660" height="236" alt="image" src="https://github.com/user-attachments/assets/ae923eda-5ef7-42c2-b514-56ccc87f3b9a" />
+<img width="668" height="267" alt="image" src="https://github.com/user-attachments/assets/58d9d866-4f86-408d-b68b-d57502a56257" />
 
 
 
 
 ---
-### Scenario 4 - Windows Defender Disabled
+### Scenario 5 - Windows Defender Disabled
 **Attack:** Windows Defender real-time protection disabled manually - simulating an attacker trying to disable endpoint protection before deploying malware.
 ```powershell
 Set-MpPreference -DisableRealtimeMonitoring $true
