@@ -223,15 +223,17 @@ nano inventory.ini
 ## 🛠️ Tools & Technologies
 | Tool | Purpose |
 |---|---|
-| **Wazuh 4.14** | SIEM - log collection, alerting |
+| **Wazuh 4.14** | SIEM — log collection, alerting |
+| **Suricata 7.0** | Network IDS — detects malicious traffic using community rules |
 | **Sysmon + sysmon-modular** | Deep Windows endpoint telemetry |
-| **Windows Defender** | Endpoint AV - logs forwarded to Wazuh |
-| **Apache2** | Web server - attack target for web-based scenarios |
+| **Windows Defender** | Endpoint AV — logs forwarded to Wazuh |
+| **Apache2** | Web server — attack target for web-based scenarios |
 | **Hydra** | SSH / Password brute force simulation |
 | **ffuf** | Web directory fuzzing |
 | **nmap** | Network port scanning |
 | **Auditd** | Linux command logging |
-| **VirtualBox / VMware** | Virtualization on primary machine |
+| **Ansible** | Automated agent deployment across endpoints |
+| **VMware** | Virtualization on primary machine |
 | **Ubuntu 24.04 LTS / Kali 2025.x / Windows 11** | Operating systems |
 
 ---
