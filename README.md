@@ -260,7 +260,7 @@ that are used daily in real SOC environments:
 
 ## 🗺️ Future Improvements
 
-- [x] Add Suricata IDS for network-level detection (NIDS)
+- [x] Add Suricata IDS for network-level detection 
 - [ ] Integrate SOARs for automated execution 
 - [ ] Simulate lateral movement between endpoints
 - [ ] Set up Slack/email alerting for critical severity events
