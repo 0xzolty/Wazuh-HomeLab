@@ -144,47 +144,56 @@ Use my .conf file for windows
 
 
 ### Step 3 - Deploy and configure Linux Agent/Server
+# Install Wazuh Agent
+
 ```bash
 wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.4-1_amd64.deb && sudo WAZUH_MANAGER='192.168.0.236' dpkg -i ./wazuh-agent_4.14.4-1_amd64.deb
 sudo systemctl daemon-reload
 sudo systemctl enable wazuh-agent
 sudo systemctl start wazuh-agent
-
+```
 
 # Add Auditd - log every command
 
+```bash
 sudo apt install auditd -y
 sudo systemctl enable auditd
 sudo systemctl start auditd
-
+```
 
 # Deploy Apache Web Server (attack target)
 
+```bash
 sudo apt install apache2 -y
 sudo systemctl enable apache2
 sudo systemctl start apache2
+```
 
 # Add FIM - Monitor web server and system files
-
-
 # Add login.php to /var/www/html
 
-# Install ,configure and deploy suricat
+# Install, configure and deploy Suricata
 
-sudo apt install suricata -y 
-cd /etc/suricata 
+```bash
+sudo apt install suricata -y
+cd /etc/suricata
 sudo nano suricata.yaml
-#Edit your ip range in this file for example 192.168.0.0 with mask /24 is ip range from 192.168.0.1 to 192.168.0.254
-#Edit your interface to match machine adapter
-# Install detection rules - community rules that tell suricata what malicious traffic looks like
+```
+
+Edit your IP range in this file, for example `192.168.0.0` with mask `/24` is IP range from `192.168.0.1` to `192.168.0.254`. Edit your interface to match machine adapter.
+
+# Install detection rules - community rules that tell Suricata what malicious traffic looks like
+
+```bash
 sudo suricata-update
-use my .conf file for linux 
+```
+
+Use my `.conf` file for Linux.
+
+```bash
 sudo systemctl enable suricata
 sudo systemctl start suricata
-
-
-sudo systemctl restart wazuh-agent 
-
+sudo systemctl restart wazuh-agent
 ```
 
 
