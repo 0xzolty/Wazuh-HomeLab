@@ -132,14 +132,23 @@ To open dashboard paste your ip in browser
 <img width="1646" height="900" alt="image" src="https://github.com/user-attachments/assets/739b9e35-6ae2-4d07-a31f-a92c7d214566" />
 
 ### Step 2 - Deploy and configure Windows Agent (Physical main machine)
+# Install Wazuh Agent on Windows
+
 ```bash
 Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.4-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='**SERVER IP' WAZUH_AGENT_NAME='**NAME'
-Manually verify the <address> field in ossec.conf. If it is set to 0.0.0.0, replace it with the correct Wazuh manager IP or hostname.
-# Download Sysmon + sysmon-modular config (https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml)
+```
+
+Manually verify the `<address>` field in `ossec.conf`. If it is set to `0.0.0.0`, replace it with the correct Wazuh manager IP or hostname.
+
+# Download Sysmon + sysmon-modular config
+Config: https://github.com/olafhartong/sysmon-modular/blob/master/sysmonconfig.xml
+
+```bash
 cd C:\Users\Yourname\Downloads
 .\Sysmon64.exe -accepteula -i sysmonconfig.xml
-Use my .conf file for windows
 ```
+
+Use my `.conf` file for Windows.
 <img width="1620" height="691" alt="image" src="https://github.com/user-attachments/assets/4d2958b1-42dc-43ed-a247-49006a60230e" />
 
 
@@ -211,20 +220,27 @@ sudo systemctl restart wazuh-agent
 ### Step 5 - Automate Agent Deployment with Ansible (Optional - for scaling)
 Instead of installing agents manually on each machine, use Ansible to deploy Wazuh agents across all endpoints at once.
 
+# Install Ansible on Wazuh server
+
 ```bash
-# instal ansible on wazuh server 
 sudo apt install ansible -y
-# create ansible directory and enter it 
-mkdir ~/ansible 
-cd ~/ansible  
-# create inventory.ini - list of machines running wazuh agents 
-touch inventory.ini
-# Add agent IP to inventory
-nano inventory.ini 
-# inside add : 
-#[linux-agents]
-#and list of ips u want to deploy wazuh agents on
 ```
+
+# Create Ansible directory and enter it
+
+```bash
+mkdir ~/ansible
+cd ~/ansible
+```
+
+# Create inventory.ini - list of machines running Wazuh agents
+
+```bash
+touch inventory.ini
+nano inventory.ini
+```
+
+Inside add:
 <img width="812" height="285" alt="image" src="https://github.com/user-attachments/assets/e4c1b412-65a8-42e2-9e08-d44a85898446" />
 
 ---
