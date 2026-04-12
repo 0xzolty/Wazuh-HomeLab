@@ -240,7 +240,7 @@ touch inventory.ini
 nano inventory.ini
 ```
 
-Inside add:
+Inside this file add all your agent ips 
 <img width="812" height="285" alt="image" src="https://github.com/user-attachments/assets/e4c1b412-65a8-42e2-9e08-d44a85898446" />
 
 ---
