@@ -50,25 +50,8 @@ This lab runs on a **physical host machine** running multiple virtual machines c
 
 ## 🗺️ Network Architecture
 
-```mermaid
-flowchart LR
-    KALI["⚔️ Kali Attacker<br/>VM"]
-    SERVER["🛡️ Wazuh Server<br/>VM"]
-    LINUX["🐧 Linux Agent<br/>VM"]
-    WIN["🪟 Windows Agent<br/>Physical Host"]
-    
-    ROUTER(["🌐 Router<br/>192.168.0.0/24"])
-    
-    KALI --- ROUTER
-    SERVER --- ROUTER
-    LINUX --- ROUTER
-    WIN --- ROUTER
-    
-    KALI -.->|Attacks| LINUX
-    KALI -.->|Attacks| WIN
-    LINUX -->|Logs| SERVER
-    WIN -->|Logs| SERVER
-```
+<img width="1529" height="639" alt="image" src="https://github.com/user-attachments/assets/727a47fd-9f18-4421-8b9c-6b54951584a5" />
+
 ## 🎯 Attack Scenarios & Detection Results
 
 ### Scenario 1 — SSH Brute Force (Hydra) -
