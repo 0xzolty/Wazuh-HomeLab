@@ -116,14 +116,18 @@ Set-MpPreference -DisableRealtimeMonitoring $true
 Set-MpPreference -DisableRealtimeMonitoring $false
 ```
 <img width="1634" height="167" alt="image" src="https://github.com/user-attachments/assets/b58cd860-679c-4094-a7a2-fe46216fa510" />
+
 ---
+
 ### Scenario 6 - DDoS attack simulation using tcpreplay and synflood capture from https://github.com/StopDDoS/packet-captures
 Get .pcap file on your system 
+
 ```bash
 wget https://github.com/StopDDoS/packet-captures/raw/main/pkt.TCP.synflood.spoofed.pcap
 ```
 Get ready with wireshark to track the traffic 
 Run .pcap file with tcpreplay tool 
+
 ```bash
 sudo tcpreplay -i ens33 !!!important!!! chceck your internet interface and change it if needed  --topspeed pkt.TCP.synflood.spoofed.pcap
 ```
