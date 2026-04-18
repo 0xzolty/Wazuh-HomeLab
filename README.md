@@ -48,6 +48,27 @@ This lab runs on a **physical host machine** running multiple virtual machines c
 | `windows-agent` | Monitored endpoint + Sysmon | Windows 11      | **Physical (host machine)** |
 | `linux-agent`   | Monitored endpoint + Apache | Ubuntu 24.04 LTS | Virtual Machine            |
 
+## 🗺️ Network Architecture
+
+```mermaid
+flowchart LR
+    KALI["⚔️ Kali Attacker<br/>VM"]
+    SERVER["🛡️ Wazuh Server<br/>VM"]
+    LINUX["🐧 Linux Agent<br/>VM"]
+    WIN["🪟 Windows Agent<br/>Physical Host"]
+    
+    ROUTER(["🌐 Router<br/>192.168.0.0/24"])
+    
+    KALI --- ROUTER
+    SERVER --- ROUTER
+    LINUX --- ROUTER
+    WIN --- ROUTER
+    
+    KALI -.->|Attacks| LINUX
+    KALI -.->|Attacks| WIN
+    LINUX -->|Logs| SERVER
+    WIN -->|Logs| SERVER
+```
 ## 🎯 Attack Scenarios & Detection Results
 
 ### Scenario 1 — SSH Brute Force (Hydra) -
@@ -341,9 +362,20 @@ that are used daily in real SOC environments:
 
 ## 📄 References
 
+## 📄 References
+
 - [Wazuh Official Documentation](https://documentation.wazuh.com)
 - [Wazuh Active Response Guide](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/)
+- [Suricata User Guide](https://docs.suricata.io/en/latest/)
+- [Emerging Threats Open Ruleset](https://rules.emergingthreats.net/)
+- [Sysmon Documentation (Microsoft)](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+- [sysmon-modular by Olaf Hartong](https://github.com/olafhartong/sysmon-modular)
+- [StopDDoS Packet Captures Repository](https://github.com/StopDDoS/packet-captures)
 - [MITRE ATT&CK Framework](https://attack.mitre.org)
+- [Hydra - THC GitHub Repository](https://github.com/vanhauser-thc/thc-hydra)
+- [ffuf - Fast Web Fuzzer](https://github.com/ffuf/ffuf)
+- [Nmap Reference Guide](https://nmap.org/book/man.html)
+- [Ansible Documentation](https://docs.ansible.com/)
 
 ---
 
