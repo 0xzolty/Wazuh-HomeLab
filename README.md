@@ -301,6 +301,8 @@ Inside this file add all your agent ips
 |---|---|
 | **Wazuh 4.14** | SIEM — log collection, alerting |
 | **Suricata 7.0** | Network IDS — detects malicious traffic using community rules |
+| **Wireshark** | Network traffic analysis — packet inspection and attack investigation |
+| **tcpreplay** | PCAP replay tool — used to simulate DDoS traffic from captured samples |
 | **Sysmon + sysmon-modular** | Deep Windows endpoint telemetry |
 | **Windows Defender** | Endpoint AV — logs forwarded to Wazuh |
 | **Apache2** | Web server — attack target for web-based scenarios |
