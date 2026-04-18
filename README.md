@@ -50,7 +50,8 @@ This lab runs on a **physical host machine** running multiple virtual machines c
 
 ## 🗺️ Network Architecture
 
-<img width="1530" height="618" alt="image" src="https://github.com/user-attachments/assets/11bd3e2e-e301-44f2-ace6-42fb801a2c61" />
+<img width="1590" height="706" alt="Zrzut ekranu 2026-04-18 195644" src="https://github.com/user-attachments/assets/ce8cf012-10ca-460e-bc30-4757ac9ba652" />
+
 
 
 ## 🎯 Attack Scenarios & Detection Results
