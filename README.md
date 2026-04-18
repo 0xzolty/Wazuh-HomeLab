@@ -128,6 +128,7 @@ Run .pcap file with tcpreplay tool
 sudo tcpreplay -i ens33 !!!important!!! chceck your internet interface and change it if needed  --topspeed pkt.TCP.synflood.spoofed.pcap
 ```
 <img width="928" height="623" alt="image" src="https://github.com/user-attachments/assets/bbc9fe83-2eab-44e3-8498-9f77248d7d4d" />
+
 **Wireshark Analysis:**
 SYN flood traffic captured - massive volume of SYN packets from multiple sources IPs targeting 10.10.10.10 on port 25565
 <img width="1179" height="731" alt="image" src="https://github.com/user-attachments/assets/cd2df3ee-a0a6-43c1-8cd7-9b6aa945bafc" />
