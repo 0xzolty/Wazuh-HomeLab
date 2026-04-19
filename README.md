@@ -12,7 +12,7 @@
 
 ## 📌 Project Overview
 
-This project simulates a mini Security Operations Center (SOC) using open-source tools on one physical machine hosting multiple virtual machines connected over a home LAN.. The goal was to build, configure, and validate a working SIEM pipeline — from log ingestion to automated threat response.
+This project simulates a mini Security Operations Center (SOC) using open-source tools on one physical machine hosting multiple virtual machines connected over a home LAN.. The goal was to build, configure, and validate a working SIEM pipeline - from log ingestion to automated threat response.
 
 Unlike typical portfolio projects that rely entirely on virtual machines, this lab uses a **physical bare-metal endpoint** as a monitored agent, making the network traffic and detection scenarios more realistic and closer to real enterprise environments.
 
@@ -56,14 +56,14 @@ This lab runs on a **physical host machine** running multiple virtual machines c
 
 ## 🎯 Attack Scenarios & Detection Results
 
-### Scenario 1 — SSH Brute Force (Hydra) -
+### Scenario 1 - SSH Brute Force (Hydra) -
 **Attack:** Hydra launched login attempts against the Linux agent over SSH.
 ```bash
 # Brute force SSH against Linux agent
 hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://
 ```
 **Detection:** Multiple failed SSH authentication attempts
-**Result:** Alert - *"SSH brute force attack detected"* — source IP and attempt count logged to dashboard.
+**Result:** Alert - *"SSH brute force attack detected"* - source IP and attempt count logged to dashboard.
 <img width="1652" height="442" alt="image" src="https://github.com/user-attachments/assets/24952491-f2b8-43bf-b4cc-47fe92458389" />
 <img width="650" height="245" alt="image" src="https://github.com/user-attachments/assets/c713571b-ecfa-4dfb-95b7-cbdc036b449d" />
 
@@ -77,7 +77,7 @@ hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://
 ffuf -u http:///192.168.0.0/FUZZ -w /usr/share/wordlists/dirb/big.txt
 ```
 **Detection:** Large number of HTTP 400 errors from same source IP 
-**Result:** Alert - *"Multiple web server 400 error codes from same source IP"* — Level 10.
+**Result:** Alert - *"Multiple web server 400 error codes from same source IP"* - Level 10.
 
 <img width="1632" height="437" alt="image" src="https://github.com/user-attachments/assets/9418cc2b-e448-4ba1-a76f-dda6bb84cc41" />
 <img width="658" height="144" alt="image" src="https://github.com/user-attachments/assets/af74e038-2043-4be7-bb01-c0e6c771fbbb" />
@@ -86,7 +86,7 @@ ffuf -u http:///192.168.0.0/FUZZ -w /usr/share/wordlists/dirb/big.txt
 
 ---
 
-### Scenario 3 — Web Login Brute Force (Hydra)
+### Scenario 3 - Web Login Brute Force (Hydra)
 **Attack:** Hydra used to brute force the login form on a custom PHP login page running on Apache.
 ```bash
 hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.0 http-post-form "/login.php:username=^USER^&password=^PASS^:401"
@@ -96,7 +96,7 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.0.0 http-post-form "/
 <img width="1173" height="634" alt="image" src="https://github.com/user-attachments/assets/6ac34bfc-5b4a-42a7-b6ce-c68c91117351" />
 
 
-### Scenario 4 — Port Scanning (Suricata + nmap)
+### Scenario 4 - Port Scanning (Suricata + nmap)
 **Attack:** Nmap SYN scan with service version detection from Kali.
 ```bash
 nmap -sV 192.168.0.126
@@ -143,7 +143,7 @@ sudo tcpreplay -i ens33 !!!important!!! check your internet interface and change
 SYN flood traffic captured - massive volume of SYN packets from multiple sources IPs targeting 10.10.10.10 on port 25565
 <img width="1179" height="731" alt="image" src="https://github.com/user-attachments/assets/cd2df3ee-a0a6-43c1-8cd7-9b6aa945bafc" />
 -All SYN packets share a similar TTL value (higher when the source 
-is closer, lower when farther away — since each router hop decrements TTL by 1), 
+is closer, lower when farther away - since each router hop decrements TTL by 1), 
 indicating the attack originated from a single source using IP spoofing 
 rather than a real distributed botnet.
 <img width="1765" height="1138" alt="image" src="https://github.com/user-attachments/assets/299494e6-9136-4593-a6cb-955a24476ee9" />
@@ -152,15 +152,16 @@ rather than a real distributed botnet.
   originating from different machines with different OS configurations. 
 <img width="1765" height="1138" alt="image" src="https://github.com/user-attachments/assets/4cc285b4-ee58-420d-a904-0c9864fc05c0" />
 - I replayed the SYN flood capture twice to observe the attack pattern:
-  - First replay at ~75s — reaching ~14,000 packets/sec
-  - Second replay at ~200s — reaching ~23,000 packets/sec
+  - First replay at ~75s - reaching ~14,000 packets/sec
+  - Second replay at ~200s - reaching ~23,000 packets/sec
   - The I/O Graph clearly shows the difference between attack traffic 
     and normal network baseline.
 <img width="1086" height="498" alt="image" src="https://github.com/user-attachments/assets/2388cb1c-2cee-4ab4-bf11-531eecf00d12" />
 - Attack was originally committed from ~37 600 different spoofed ips 
 <img width="254" height="43" alt="image" src="https://github.com/user-attachments/assets/686bbb48-956c-43c5-9b30-c02e02771569" />
+
 **Wazuh Detection:**
-Suricata did not trigger a SYN flood alert — community rules focus on 
+Suricata did not trigger a SYN flood alert - community rules focus on 
 signature-based detection (e.g. Nmap), not volumetric attacks. 
 However, Wazuh detected the attack's impact through agent queue overload:
 - *"Agent event queue is 90% full"*
@@ -300,13 +301,13 @@ Inside this file add all your agent ips
 ## 🛠️ Tools & Technologies
 | Tool | Purpose |
 |---|---|
-| **Wazuh 4.14** | SIEM — log collection, alerting |
-| **Suricata 7.0** | Network IDS — detects malicious traffic using community rules |
-| **Wireshark** | Network traffic analysis — packet inspection and attack investigation |
-| **tcpreplay** | PCAP replay tool — used to simulate DDoS traffic from captured samples |
+| **Wazuh 4.14** | SIEM - log collection, alerting |
+| **Suricata 7.0** | Network IDS - detects malicious traffic using community rules |
+| **Wireshark** | Network traffic analysis - packet inspection and attack investigation |
+| **tcpreplay** | PCAP replay tool - used to simulate DDoS traffic from captured samples |
 | **Sysmon + sysmon-modular** | Deep Windows endpoint telemetry |
-| **Windows Defender** | Endpoint AV — logs forwarded to Wazuh |
-| **Apache2** | Web server — attack target for web-based scenarios |
+| **Windows Defender** | Endpoint AV - logs forwarded to Wazuh |
+| **Apache2** | Web server - attack target for web-based scenarios |
 | **Hydra** | SSH / Password brute force simulation |
 | **ffuf** | Web directory fuzzing |
 | **nmap** | Network port scanning |
