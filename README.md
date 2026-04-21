@@ -270,31 +270,8 @@ sudo systemctl restart wazuh-agent
 ### Step 4 - Run Attack Simulations (from Kali VM)
 (Look  Attack Scenarios & Detection Results step)
 
-### Step 5 - Automate Agent Deployment with Ansible (Optional - for scaling)
-Instead of installing agents manually on each machine, use Ansible to deploy Wazuh agents across all endpoints at once.
 
-# Install Ansible on Wazuh server
 
-```bash
-sudo apt install ansible -y
-```
-
-# Create Ansible directory and enter it
-
-```bash
-mkdir ~/ansible
-cd ~/ansible
-```
-
-# Create inventory.ini - list of machines running Wazuh agents
-
-```bash
-touch inventory.ini
-nano inventory.ini
-```
-
-Inside this file add all your agent ips 
-<img width="812" height="285" alt="image" src="https://github.com/user-attachments/assets/e4c1b412-65a8-42e2-9e08-d44a85898446" />
 
 ---
 
