@@ -1,4 +1,4 @@
-f# 🛡️ Home SOC Lab - Automated Threat Detection with Wazuh SIEM
+# 🛡️ Home SOC Lab - Automated Threat Detection with Wazuh SIEM
 
 > A hands-on Security Operations Center simulation built on a physical machine running multiple virtual machines connected via a home LAN.  
 > Demonstrates real-world detection of brute force attacks, privilege escalation, web attacks, file integrity violations and more - with automated response.
